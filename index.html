@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AQI to Cigarette Equivalent</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(to right, #56CCF2, #2F80ED);
+            color: white;
+            padding: 20px;
+            position: relative;
+        }
+        .logo {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            animation: fadeInOut 2s infinite alternate;
+        }
+        @keyframes fadeInOut {
+            0% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+        .container {
+            margin-top: 50px;
+        }
+        input {
+            padding: 10px;
+            margin: 10px;
+            border: none;
+            border-radius: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            background-color: #ff5733;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #c70039;
+        }
+        #result {
+            font-size: 24px;
+            margin-top: 20px;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">Created by Anantram Das</div>
+    <div class="container">
+        <h1>AQI to Cigarette Calculator</h1>
+        <p>Enter the AQI value and the number of hours you spent outside:</p>
+        <input type="number" id="aqi" placeholder="AQI" min="1">
+        <input type="number" id="hours" placeholder="Hours" min="1">
+        <button onclick="calculateCigarettes()">Calculate</button>
+        <p id="result"></p>
+    </div>
+    
+    <script>
+        function calculateCigarettes() {
+            let aqi = document.getElementById("aqi").value;
+            let hours = document.getElementById("hours").value;
+            
+            if (!aqi || aqi <= 0 || !hours || hours <= 0) {
+                document.getElementById("result").innerText = "Please enter valid AQI and hours.";
+                return;
+            }
+            
+            let cigarettes = (aqi * hours * 0.006).toFixed(2); // Rough estimate
+            let resultText = `With an AQI of ${aqi}, spending ${hours} hours outside is like smoking ${cigarettes} cigarettes.`;
+            
+            let resultElement = document.getElementById("result");
+            resultElement.innerText = resultText;
+            resultElement.style.opacity = 1;
+        }
+    </script>
+</body>
+</html>
